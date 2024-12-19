@@ -1,0 +1,31 @@
+{
+    "layer": "top",
+    "modules-left": ["hyprland/workspaces", "hyprland/submap"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": ["backlight", "battery", "clock", "wireplumber"],
+    
+    "backlight": {
+    	"device": "intel_backlight",
+	"format": "{percent}% {icon}",
+	"format-icons": ["", ""]
+    },
+    "clock": {
+        "format-alt": "{:%a, %d. %b %H:%M}"
+    },
+    "wireplumber": {
+        "format": "{volume}% {icon}",
+    	"format-icons": ["", "", ""],
+	"format-muted": "",
+	"on-click": "pavucontrol"
+    },
+    "battery": {
+	"interval": 60,
+	"states": {
+		"warning": 30,
+		"critical": 15
+	},
+	"format": "{capacity}% {icon}",
+	"format-icons": ["", "", "", "", ""],
+	"max-length": 25
+    }
+}
