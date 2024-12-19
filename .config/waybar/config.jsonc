@@ -2,30 +2,43 @@
     "layer": "top",
     "modules-left": ["hyprland/workspaces", "hyprland/submap"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["backlight", "battery", "clock", "wireplumber"],
+    "modules-right": ["bluetooth", "backlight", "battery", "clock", "wireplumber"],
     
     "backlight": {
     	"device": "intel_backlight",
-	"format": "{percent}% {icon}",
-	"format-icons": ["", ""]
+        "format": "{percent}% {icon}",
+        "format-icons": ["", ""]
     },
+
     "clock": {
         "format-alt": "{:%a, %d. %b %H:%M}"
     },
+
     "wireplumber": {
         "format": "{volume}% {icon}",
     	"format-icons": ["", "", ""],
-	"format-muted": "",
-	"on-click": "pavucontrol"
+        "format-muted": "",
+        "on-click": "pavucontrol"
     },
+
     "battery": {
-	"interval": 60,
-	"states": {
-		"warning": 30,
-		"critical": 15
-	},
-	"format": "{capacity}% {icon}",
-	"format-icons": ["", "", "", "", ""],
-	"max-length": 25
+        "interval": 60,
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-icons": ["", "", "", "", ""],
+        "max-length": 25
+    },
+
+    "bluetooth": {
+        "format": " {status}",
+        "format-connected": " {device_alias}",
+        "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+        "tooltip-format": "{controller_alias}\\t{controller_address}\\n\\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\\t{controller_address}\\n\\n{num_connections} connected\\n\\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\\t{device_address}\\t{device_battery_percentage}%"
     }
 }
