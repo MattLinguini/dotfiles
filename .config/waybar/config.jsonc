@@ -2,43 +2,42 @@
     "layer": "top",
     "modules-left": ["hyprland/workspaces", "hyprland/submap"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["bluetooth", "backlight", "battery", "clock", "wireplumber"],
-    
-    "backlight": {
-    	"device": "intel_backlight",
-        "format": "{percent}% {icon}",
-        "format-icons": ["", ""]
-    },
+    "modules-right": ["memory", "cpu", "battery", "clock", "pulseaudio"],
 
     "clock": {
-        "format-alt": "{:%a, %d. %b %H:%M}"
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "format": "{:%I:%M %p}",
+        "format-alt": "{:%a, %d %b, %I:%M %p}"
     },
 
-    "wireplumber": {
-        "format": "{volume}% {icon}",
-    	"format-icons": ["", "", ""],
-        "format-muted": "",
-        "on-click": "pavucontrol"
+    "pulseaudio": {
+        "format": "󰋋 {volume:2}%",
+        "format-muted": "󰝟",
+        "format-bluetooth": "󰂯 {volume:2}%",
+        "format-bluetooth-muted": "󰂲"
     },
 
     "battery": {
-        "interval": 60,
         "states": {
             "warning": 30,
             "critical": 15
         },
         "format": "{capacity}% {icon}",
-        "format-icons": ["", "", "", "", ""],
-        "max-length": 25
+        "format-charging": "{capacity}% {icon}",
+        "format-icons": {
+            "charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
+            "default": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+        }
     },
 
-    "bluetooth": {
-        "format": " {status}",
-        "format-connected": " {device_alias}",
-        "format-connected-battery": " {device_alias} {device_battery_percentage}%",
-        "tooltip-format": "{controller_alias}\\t{controller_address}\\n\\n{num_connections} connected",
-        "tooltip-format-connected": "{controller_alias}\\t{controller_address}\\n\\n{num_connections} connected\\n\\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}\\t{device_address}",
-        "tooltip-format-enumerate-connected-battery": "{device_alias}\\t{device_address}\\t{device_battery_percentage}%"
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+
+    "memory": {
+        "format": "{used:0.1f}GiB ",
+        "tooltip": false
     }
+
 }
