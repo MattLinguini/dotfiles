@@ -1,52 +1,34 @@
 import {bind} from "astal"
 import Hyprland from "gi://AstalHyprland"
-import Divider from "../../util/Divider";
-
-function groupByProperty(array: Hyprland.Workspace[],): Hyprland.Workspace[][] {
-    const map = new Map<Hyprland.Monitor, Hyprland.Workspace[]>();
-
-    array.forEach((item) => {
-        const key = item.monitor;
-        if (key === null) {
-            return
-        }
-        if (!map.has(key)) {
-            map.set(key, []);
-        }
-        map.get(key)!.unshift(item);
-    });
-
-    return Array.from(map.values()).sort((a, b) => {
-        return a[0].monitor.id - b[0].monitor.id
-    });
-}
 
 export function Workspaces() {
     const hypr = Hyprland.get_default()
 
-    return <box>
-        {bind(hypr, "workspaces").as((workspaces) => {
-            const groupedWorkspaces = groupByProperty(workspaces)
-            return groupedWorkspaces.map((workspaceGroup, index) => {
-                return <box>
-                    {index > 0 && index < groupedWorkspaces.length && <Divider/>}
-                    {workspaceGroup.sort((a, b) => {
-                        return a.id - b.id
-                    }).map((workspace) => {
-                        return <button
-                            label={
-                                bind(workspace.monitor, "activeWorkspace").as((activeWorkspace) =>
-                                    activeWorkspace.id == workspace.id ? "" : ""
-                                )
-                            }
-                            className="iconButton"
-                            onClicked={() => {
-                                hypr.dispatch("workspace", `${workspace.id}`)
-                            }}>
-                        </button>
-                    })}
-                </box>
-            })
-        })}
+    return <box className="Workspaces">
+        {bind(hypr, "workspaces").as(wss => wss
+            .filter(ws => !(ws.id >= -99 && ws.id <= -2)) // filter out special workspaces
+            .sort((a, b) => a.id - b.id)
+            .map(ws => (
+                <button
+                    className={bind(hypr, "focusedWorkspace").as(fw =>
+                        ws === fw ? "focused" : "")}
+                    onClicked={() => ws.focus()}>
+                    {ws.id}
+                </button>
+            ))
+        )}
+    </box>
+}
+
+export function FocusedClient() {
+    const hypr = Hyprland.get_default()
+    const focused = bind(hypr, "focusedClient")
+
+    return <box
+        className="Focused"
+        visible={focused.as(Boolean)}>
+        {focused.as(client => (
+            client && <label label={bind(client, "title").as(String)} />
+        ))}
     </box>
 }

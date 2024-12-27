@@ -1,30 +1,27 @@
-import {App, Astal, Gtk} from "astal/gtk3"
-import { Workspaces } from "./widget/Workspaces"
+import {App, Astal, Gtk, Gdk} from "astal/gtk3"
+import { Workspaces, FocusedClient } from "./widget/Workspaces"
+import { Clock } from "./widget/Clock"
+import { BatteryLevel } from "./widget/Battery"
+import { Wifi } from "./widget/Network"
 
-export default function () {
-    let iconCss = ""
+export function Bar () {
+    const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
     return <window
-        css={`background: transparent;`}
-        monitor={0}
+        className="Bar"
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
-        margin={5}
-        anchor={Astal.WindowAnchor.TOP
-            | Astal.WindowAnchor.LEFT
-            | Astal.WindowAnchor.RIGHT}
-        application={App}>
-        <centerbox
-            className="window"
-            css={`
-                padding: 2px;
-                min-height: 40px;
-            `}>
-            <box halign={Gtk.Align.START}>
-                <Workspaces vertical={false}/>
+        anchor={TOP | LEFT | RIGHT}>
+        <centerbox>
+            <box hexpand halign={Gtk.Align.START}>
+                <Workspaces />
             </box>
             <box>
+                <FocusedClient />
             </box>
-            <box halign={Gtk.Align.END}>
+            <box hexpand halign={Gtk.Align.END} >
+                <Wifi />
+                <BatteryLevel />
+                <Clock />
             </box>
         </centerbox>
     </window>

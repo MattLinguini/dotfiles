@@ -1,0 +1,104 @@
+@use '../color.scss' as colors;
+@use "sass:color";
+
+$radius: 7px;
+
+window.Bar {
+    border: none;
+    box-shadow: none;
+    background-color: colors.$background;
+    color: colors.$foreground;
+    font-size: 1.1em;
+    font-weight: bold;
+
+    label {
+        margin: 0 8px;
+    }
+
+    .Workspaces  {
+        button {
+            all: unset;
+            background-color: transparent;
+
+            &:hover label {
+                background-color: color.adjust(colors.$foreground, $alpha: -0.84);
+                border-color: color.adjust(colors.$activeBorder, $alpha: -0.8);
+            }
+
+            &:active label {
+                background-color: color.adjust(colors.$foreground, $alpha: -0.8)
+            }
+        }
+
+        label {
+            transition: 200ms;
+            padding: 0 8px;
+            margin: 2px;
+            border-radius: $radius;
+            border: 1pt solid transparent;
+        }
+
+        .focused label {
+            color: colors.$activeBorder;
+            border-color: colors.$activeBorder;
+        }
+    }
+
+    .SysTray {
+        margin-right: 8px;
+
+        button {
+            padding: 0 4px;
+        }
+    }
+
+    .FocusedClient {
+        color: colors.$activeBorder;
+    }
+
+    .Media .Cover {
+        min-height: 1.2em;
+        min-width: 1.2em;
+        border-radius: $radius;
+        background-position: center;
+        background-size: contain;
+    }
+
+    .Battery label {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .AudioSlider {
+        * {
+            all: unset;
+        }
+
+        icon {
+            margin-right: .6em;
+        }
+
+        & {
+            margin: 0 1em;
+        }
+
+        trough {
+            background-color: color.adjust(colors.$foreground, $alpha: -0.8);
+            border-radius: $radius;
+        }
+
+        highlight {
+            background-color: colors.$activeBorder;
+            min-height: .8em;
+            border-radius: $radius;
+        }
+
+        slider {
+            background-color: colors.$foreground;
+            border-radius: $radius;
+            min-height: 1em;
+            min-width: 1em;
+            margin: -.2em;
+        }
+    }
+}
