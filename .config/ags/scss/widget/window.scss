@@ -1,0 +1,19 @@
+$bg: #1e1e2e;
+$fg: #9399b2;
+$sliderTrough: #4c566a;
+
+.window {
+    background-color: $bg;
+    // border-radius: 8px;
+    // border-color: $primary;
+    border-width: 0px;
+    // border-style: solid;
+}
+
+.focusedWindow {
+    background-color: $bg;
+    // border-radius: 8px;
+    // border-color: $fg;
+    border-width: 0px;
+    // border-style: solid;
+}
