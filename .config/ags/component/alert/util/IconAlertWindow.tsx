@@ -60,10 +60,10 @@ export function IconAlertWindow(
         }}>
         <box
             halign={Gtk.Align.CENTER}
-            css={"padding: 18px 5px;"}>
+            className={"alertContainer"}>
             <label
-                css={"margin-right: 15px;"}
-                className="alertIcon"
+                css={"margin-right: 20px; min-width: 60px"} // Center icon and ensure box is the same width.
+                className={"alertIcon"}
                 label={iconLabel}/>
         </box>
     </window>

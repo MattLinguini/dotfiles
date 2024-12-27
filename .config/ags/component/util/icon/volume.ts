@@ -33,7 +33,7 @@ export function getMicrophoneIcon(device?: Wp.Endpoint): string {
     let muted = device?.mute
 
     if (volume === 0 || muted) {
-        return "󰍭"
+        return " " // We love font awesome icons not being a consistant size
     } else {
         return ""
     }

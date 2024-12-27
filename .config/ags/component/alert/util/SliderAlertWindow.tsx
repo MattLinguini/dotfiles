@@ -63,22 +63,22 @@ export function SliderAlertWindow(
         }}>
         <box
             halign={Gtk.Align.CENTER}
-            css={"padding: 18px 5px;"}>
+            className={"alertContainer"}>
             <label
                 css={"margin-right: 15px;"}
-                className="alertIcon"
+                className={"alertIcon"}
                 label={iconLabel}/>
             <box
                 vertical={true}
-                css={"margin-left: 10px;"}
+                css={"margin-left: 15px;"}
                 valign={Gtk.Align.CENTER}>
                 <label
-                    className="labelSmall"
+                    className={"labelSmall"}
                     label={label}
                     halign={Gtk.Align.START}/>
                 <slider
-                    css="padding-top: 2px;"
-                    className="alertProgress"
+                    css={"padding-top: 2px;"}
+                    className={"alertProgress"}
                     hexpand={true}
                     value={sliderValue}/>
             </box>

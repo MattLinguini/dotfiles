@@ -4,14 +4,6 @@
     background-color: colors.$background;
     border-radius: 8px;
     border-color: colors.$inactiveBorder;
-    border-width: 0px;
-    border-style: solid;
-}
-
-.focusedWindow {
-    background-color: colors.$background;
-    border-radius: 8px;
-    border-color: colors.$activeBorder;
-    border-width: 0px;
+    border-width: 2px;
     border-style: solid;
 }
