@@ -1,19 +1,17 @@
-$bg: #1e1e2e;
-$fg: #9399b2;
-$sliderTrough: #4c566a;
+@use 'color.scss' as colors;
 
 .window {
-    background-color: $bg;
+    background-color: colors.$background;
     border-radius: 8px;
-    // border-color: $primary;
+    border-color: colors.$inactiveBorder;
     border-width: 0px;
-    // border-style: solid;
+    border-style: solid;
 }
 
 .focusedWindow {
-    background-color: $bg;
+    background-color: colors.$background;
     border-radius: 8px;
-    // border-color: $fg;
+    border-color: colors.$activeBorder;
     border-width: 0px;
-    // border-style: solid;
+    border-style: solid;
 }

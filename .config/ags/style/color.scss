@@ -1,0 +1,99 @@
+//    _____      _                              _         __  __            _           
+//   / ____|    | |                            (_)       |  \/  |          | |          
+//  | |     __ _| |_ _ __  _ __  _   _  ___ ___ _ _ __   | \  / | ___   ___| |__   __ _ 
+//  | |    / _` | __| '_ \| '_ \| | | |/ __/ __| | '_ \  | |\/| |/ _ \ / __| '_ \ / _` |
+//  | |___| (_| | |_| |_) | |_) | |_| | (_| (__| | | | | | |  | | (_) | (__| | | | (_| |
+//   \_____\__,_|\__| .__/| .__/ \__,_|\___\___|_|_| |_| |_|  |_|\___/ \___|_| |_|\__,_|
+//                  | |   | |                                                           
+//                  |_|   |_|                             
+$rosewater: #f5e0dc;
+$flamingo: #f2cdcd;
+$pink: #f5c2e7;
+$mauve: #cba6f7;
+$red: #f38ba8;
+$maroon: #eba0ac;
+$peach: #fab387;
+$yellow: #f9e2af;
+$green: #a6e3a1;
+$teal: #94e2d5;
+$sky: #89dceb;
+$sapphire: #74c7ec;
+$blue: #89b4fa;
+$lavender: #b4befe;
+$text: #cdd6f4;
+$subtext1: #bac2de;
+$subtext0: #a6adc8;
+$overlay2: #9399b2;
+$overlay1: #7f849c;
+$overlay0: #6c7086;
+$surface2: #585b70;
+$surface1: #45475a;
+$surface0: #313244;
+$base: #1e1e2e;
+$mantle: #181825;
+$crust: #11111b;
+
+//   _____      _                
+//  / ____|    | |               
+// | |     ___ | | ___  _ __ ___ 
+// | |    / _ \| |/ _ \| '__/ __|
+// | |___| (_) | | (_) | |  \__ \
+// \_____\___/|_|\___/|_|  |___/
+
+// -=[ Background Colors ]=- //
+$background: $base;
+$foreground: $subtext1; // Latte BG
+$secondary0: $crust;
+$secondary1: $mantle;
+$overlay2: $overlay2;
+$overlay1: $overlay1;
+$overlay0: $overlay0;
+$surface2: $surface2;
+$surface1: $surface1;
+$surface0: $surface0;
+// -=[ Typography ]=- //
+$body: $text;
+$heading: $text;
+$label0: $subtext0;
+$label1: $subtext1;
+$subtle: $overlay1;
+$link: $blue;
+$sucess: $green;
+$warning: $yellow;
+$error: $red;
+$tag: $blue;
+$selection: $overlay2;
+// -=[ Window ]=- //
+$cursor: $rosewater;
+$cursorText: $crust;
+$activeBorder: $lavender;
+$inactiveBorder: $overlay0;
+$bellBorder: $yellow;
+// -=[ Colors ]=- //
+$color0: $surface1;
+$color1: $red;
+$color2: $green;
+$color3: $yellow;
+$color4: $blue;
+$color5: $pink;
+$color6: $teal;
+$color7: $subtext0;
+// -=[ Bold Colors ]=- //
+$color8: $surface2;
+$color9: #000000;
+$color10: #000000;
+$color11: #000000;
+$color12: #000000;
+$color13: #000000;
+$color14: #000000;
+$color15: $subtext1;
+// -=[ Extended Colors ]=- //
+$color16: $peach;
+$color17: $rosewater;
+// -=[ Syntax Colors ]=- //
+$mark1: $lavender;
+$mark1Text: $crust;
+$mark2: $mauve;
+$mark2Text: $crust;
+$mark3: $sapphire;
+$mark3Text: $crust;

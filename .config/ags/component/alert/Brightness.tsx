@@ -1,6 +1,6 @@
 import {bind} from "astal"
 import Brightness from "../util/brightness"
-import { SliderAlertWindow } from "./SliderAlertWindow"
+import { SliderAlertWindow } from "./util/SliderAlertWindow"
 import { getBrightnessIcon } from "../util/icon/brightness"
 
 /**

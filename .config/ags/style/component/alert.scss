@@ -1,17 +1,11 @@
-$bg: #2e3440;
-$fg: #d8dee9;
-$primary: #81a1c1;
-$buttonPrimary: #5e81ac;
-$sliderTrough: #313244;
-$bgHover: #4c566a;
-$warning: #BF616A;
+@use '../color.scss' as colors;
 
 .alertIcon {
   all: unset;
-  margin-left: 20px;
+  margin-left: 10px;
   margin-right: 10px;
   font-size: 50px;
-  color: $fg;
+  color: colors.$foreground;
 }
 
 .alertProgress {
@@ -22,7 +16,7 @@ $warning: #BF616A;
 
 .alertProgress trough {
   all: unset;
-  background: $sliderTrough;
+  background: colors.$surface0;
   min-height: 8px;
   border-radius: 16px;
 }
@@ -35,5 +29,5 @@ $warning: #BF616A;
   all: unset;
   min-width: 8px;
   border-radius: 16px;
-  background: $fg;
+  background: colors.$foreground;
 }

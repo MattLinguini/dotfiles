@@ -1,62 +1,40 @@
 import Wp from "gi://AstalWp"
 
-export function getVolumeIcon(speaker?: Wp.Endpoint) {
-    let volume = speaker?.volume
-    let muted = speaker?.mute
-    let speakerIcon = speaker?.icon
-    if (volume == null || speakerIcon == null) return ""
+/**
+ * Gets the current volume level then assigns the proper icon
+ * for that level.
+ *
+ * @returns {string} The volume icon.
+ */
+export function getVolumeIcon(device?: Wp.Endpoint): string {
+    let volume = device?.volume
+    let muted = device?.mute
+    if (volume == null) return ""
 
-    if (speakerIcon.includes("bluetooth")) {
-        if (volume === 0 || muted) {
-            return "󰟎"
-        } else {
-            return "󰥰"
-        }
-    } else if (speakerIcon.includes("headset")) {
-        if (volume === 0 || muted) {
-            return "󰟎"
-        } else {
-            return "󰋋"
-        }
+    if (volume === 0 || muted) {
+        return "󰝟"
+    } else if (volume < 0.33) {
+        return ""
+    } else if (volume < 0.66) {
+        return ""
     } else {
-        if (volume === 0 || muted) {
-            return "󰝟"
-        } else if (volume < 0.33) {
-            return ""
-        } else if (volume < 0.66) {
-            return ""
-        } else {
-            return "󰕾"
-        }
+        return "󰕾"
     }
 }
 
-export function getMicrophoneIcon(mic?: Wp.Endpoint): string {
-    let volume = mic?.volume
-    let muted = mic?.mute
-    let micIcon = mic?.icon
+/**
+ * Gets the mute state of the microphone then
+ * assigns the proper icon.
+ *
+ * @returns {string} The microphone icon.
+ */
+export function getMicrophoneIcon(device?: Wp.Endpoint): string {
+    let volume = device?.volume
+    let muted = device?.mute
 
-    if (micIcon != null && micIcon.includes("bluetooth")) {
-        if (volume === 0 || muted) {
-            return "󰟎"
-        } else {
-            return "󰥰"
-        }
-    } else if (micIcon != null && micIcon.includes("headset")) {
-        if (volume === 0 || muted) {
-            return "󰋐"
-        } else {
-            return "󰋎"
-        }
+    if (volume === 0 || muted) {
+        return "󰍭"
     } else {
-        if (volume === 0 || muted) {
-            return "󰍭"
-        } else {
-            return ""
-        }
+        return ""
     }
-}
-
-export function toggleMuteEndpoint(endpoint?: Wp.Endpoint) {
-    endpoint?.set_mute(!endpoint?.mute)
 }
