@@ -9,12 +9,12 @@ export function VolumeAlert() {
     const speakerVar = Variable.derive([
         bind(defaultSpeaker, "description"),
         bind(defaultSpeaker, "volume"),
-        bind(defaultSpeaker, "mute") // TODO: For some reason my system always thinks "mute" is true so this never gets toggled.
-    ])
+        bind(defaultSpeaker, "mute")
+    ], (volume, mute) => ({volume, mute })); // Ensure that when either volume and mute change, it updates the binding.
 
     return <AlertWindow
         iconLabel={speakerVar(() => getVolumeIcon(defaultSpeaker))}
-        label="Volume"
-        sliderValue={bind(defaultSpeaker, "volume")}
+        label={"Volume"}
+        sliderValue={speakerVar(() => defaultSpeaker.volume)}
         windowName={"volumeAlert"}/>
 }

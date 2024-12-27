@@ -1,4 +1,4 @@
-import {bind} from "astal"
+import {bind, Variable} from "astal"
 import Brightness from "../utils/brightness"
 import { AlertWindow } from "./AlertWindow"
 import { getBrightnessIcon } from "../utils/icons/brightness"
@@ -10,7 +10,7 @@ export function BrightnessAlert() {
         iconLabel={bind(brightness, "screen").as(() => {
             return getBrightnessIcon(brightness)
         })}
-        label="Brightness"
+        label={"Brightness"}
         sliderValue={bind(brightness, "screen")}
         windowName={"brightnessAlert"}/>
 }
