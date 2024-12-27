@@ -1,3 +1,5 @@
+/* Credit to https://github.com/JohnOberhauser for most of this */
+
 import {App, Astal, Gtk} from "astal/gtk3"
 import {Binding, GLib} from "astal"
 
