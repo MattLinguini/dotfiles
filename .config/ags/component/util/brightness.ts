@@ -1,3 +1,5 @@
+/* Credit to https://github.com/JohnOberhauser for most of this */
+
 import GObject, { register, property } from "astal/gobject"
 import { monitorFile, readFileAsync } from "astal/file"
 import { exec, execAsync } from "astal/process"

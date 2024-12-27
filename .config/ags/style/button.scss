@@ -1,0 +1,61 @@
+$bg: #2e3440;
+$fg: #d8dee9;
+$primary: #81a1c1;
+$buttonPrimary: #2e3440;
+$sliderTrough: #313244;
+$bgHover: #4c566a;
+$warning: #BF616A;
+
+.iconButton {
+  all: unset;
+  background-color: $bg;
+  color: $fg;
+  padding: 4px 4px 4px 2px;
+  border: none;
+  min-height: 25px;
+  min-width: 30px;
+  border-radius: 8px;
+}
+
+.iconButton:hover {
+  background-color: $bgHover;
+}
+
+.warningIconButton {
+  all: unset;
+  background-color: $bg;
+  color: $warning;
+  padding: 4px 4px 4px 2px;
+  border: none;
+  min-height: 25px;
+  min-width: 30px;
+  border-radius: 8px;
+}
+
+.warningIconButton:hover {
+  background-color: $bgHover;
+}
+
+.primaryButton {
+  all: unset;
+  background-color: $buttonPrimary;
+  color: $fg;
+  border-radius: 8px;
+  padding: 4px 8px 4px 8px;
+}
+
+.primaryButton:hover {
+  background-color: $bgHover;
+}
+
+.transparentButton {
+  all: unset;
+  background-color: transparent;
+  color: $fg;
+  border-radius: 8px;
+  padding: 4px 8px 4px 8px;
+}
+
+.transparentButton:hover {
+  background-color: $bgHover;
+}

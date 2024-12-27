@@ -1,7 +1,7 @@
 import {bind, Variable} from "astal"
 import { AlertWindow } from "./AlertWindow"
 import Wp from "gi://AstalWp"
-import { getVolumeIcon } from "../utils/icons/volume"
+import { getVolumeIcon } from "../util/icon/volume"
 
 export function VolumeAlert() {
     const defaultSpeaker = Wp.get_default()!.audio.default_speaker
