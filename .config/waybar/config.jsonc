@@ -2,7 +2,7 @@
     "layer": "top",
     "modules-left": ["hyprland/workspaces", "hyprland/submap"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["memory", "cpu", "battery", "clock", "pulseaudio"],
+    "modules-right": ["network", "backlight", "pulseaudio", "memory", "cpu", "battery", "clock"],
 
     "clock": {
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
@@ -10,23 +10,38 @@
         "format-alt": "{:%a, %d %b, %I:%M %p}"
     },
 
-    "pulseaudio": {
-        "format": "󰋋 {volume:2}%",
-        "format-muted": "󰝟",
-        "format-bluetooth": "󰂯 {volume:2}%",
-        "format-bluetooth-muted": "󰂲"
-    },
-
     "battery": {
         "states": {
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% {icon}",
+        "format": "{icon}",
+        "format-charging": "{icon}",
         "format-icons": {
-            "charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
-            "default": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+            "charging": [
+                "󰢜", 
+                "󰂆", 
+                "󰂇", 
+                "󰂈", 
+                "󰢝", 
+                "󰂉", 
+                "󰢞", 
+                "󰂊", 
+                "󰂋", 
+                "󰂅"
+            ],
+            "default": [
+                "󰁺", 
+                "󰁻", 
+                "󰁼", 
+                "󰁽", 
+                "󰁾", 
+                "󰁿", 
+                "󰂀", 
+                "󰂁", 
+                "󰂂", 
+                "󰁹"
+            ]
         }
     },
 
@@ -38,6 +53,67 @@
     "memory": {
         "format": "{used:0.1f}GiB ",
         "tooltip": false
+    },
+
+    "network": {
+        "format": "{icon}",
+        "format-disconnected": "󰖪",
+        "format-ethernet": "󰈀/{cidr}",
+        "format-icons": [
+            "󰤯",
+            "󰤟",
+            "󰤢",
+            "󰤥",
+            "󰤨"
+        ],
+        "format-linked": "󰖩",
+        "format-wifi": "{icon}",
+        "interval": 30,
+        "on-click": "nmtui",
+        "on-click-right": "rfkill toggle wifi",
+        "tooltip": true,
+        "tooltip-format": "interface:\t{ifname}\n\nconnected to {essid} at {signalStrength}% strength",
+        "tooltip-format-disconnected": "interface: {ifname}\nconnected to {essid}\nat {signalStrength}% strength"
+    },
+
+    "pulseaudio": {
+        "format": "{icon}",
+        "format-bluetooth": "{icon}",
+        "format-icons": {
+        "default": [
+            "󰕿",
+            "",
+            "󰕾"
+        ]
+        },
+        "format-muted": "󰖁",
+        "on-click": "pavucontrol",
+        "on-click-right": "pactl set-sink-mute 0 toggle",
+        "scroll-step": 1,
+        "tooltip-format": "{desc}\t ({volume}%)"
+    },
+    "pulseaudio/slider": {
+        "max": 100,
+        "min": 0,
+        "orientation": "horizontal"
+    },
+
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon}",
+        "tooltip-format": "{percent}%",
+        "format-icons": [
+            "󰃞",
+            "󰃝",
+            "󰃟",
+            "󰃠"
+        ]
+    },
+    "backlight/slider": {
+        "max": 100,
+        "min": 0,
+        "orientation": "horizontal",
+        "device": "intel_backlight"
     }
 
 }
