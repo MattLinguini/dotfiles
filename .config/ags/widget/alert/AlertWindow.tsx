@@ -16,6 +16,8 @@ export function AlertWindow(
 ) {
     let windowVisibilityTimeout: GLib.Source | null = null
 
+    const alertTimeout = 1_000
+
     return <window
         monitor={0}
         name={windowName}
@@ -43,7 +45,7 @@ export function AlertWindow(
                     self.visible = false
                     windowVisibilityTimeout?.destroy()
                     windowVisibilityTimeout = null
-                }, 1_000)
+                }, alertTimeout)
             })
         }}>
         <box
