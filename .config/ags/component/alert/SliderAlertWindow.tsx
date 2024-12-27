@@ -3,22 +3,33 @@
 import {App, Astal, Gtk} from "astal/gtk3"
 import {Binding, GLib} from "astal"
 
-export function AlertWindow(
+/**
+ * Creates an alert window with a slider specifically used notify the user
+ * of changes to a system values with a range (ex. brightness, volume).
+ * 
+ * @param iconLabel Font icon to displayed.
+ * @param label Short description of the slider element being changed.
+ * @param sliderValue Value of the slider element.
+ * @param windowName Name of the window (for Window Manager reference).
+ * @param alertTimeout Time it takes for the alert to disappear (in milliseconds).
+ * @returns {JSX.Element} A window component alerting the user to a state change.
+ */
+export function SliderAlertWindow(
     {
         iconLabel,
         label,
         sliderValue,
-        windowName
+        windowName,
+        alertTimeout
     }: {
         iconLabel: Binding<string>,
         label: string,
         sliderValue: Binding<number>,
-        windowName: string
+        windowName: string,
+        alertTimeout: number
     }
-) {
+): JSX.Element {
     let windowVisibilityTimeout: GLib.Source | null = null
-
-    const alertTimeout = 1_000
 
     return <window
         monitor={0}
@@ -51,7 +62,6 @@ export function AlertWindow(
             })
         }}>
         <box
-            vertical={false}
             halign={Gtk.Align.CENTER}
             css={"padding: 18px 5px;"}>
             <label

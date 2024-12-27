@@ -20,20 +20,11 @@ export default function () {
                 min-height: 40px;
             `}>
             <box halign={Gtk.Align.START}>
-                {/* <MenuButton css={""}/> */}
                 <Workspaces vertical={false}/>
             </box>
             <box>
-                {/* <ClockButton css={""} singleLine={true}/> */}
             </box>
             <box halign={Gtk.Align.END}>
-                {/* <ScreenRecordingButton css={iconCss}/>
-                <VolumeButton css={iconCss}/>
-                <MicrophoneButton css={iconCss}/>
-                <BluetoothButton css={iconCss}/>
-                <VpnButton css={iconCss}/>
-                <NetworkButton css={iconCss}/>
-                <BatteryButton css={iconCss}/> */}
             </box>
         </centerbox>
     </window>

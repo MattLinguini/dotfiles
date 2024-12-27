@@ -2,9 +2,7 @@ import {bind} from "astal"
 import Hyprland from "gi://AstalHyprland"
 import Divider from "../../util/Divider";
 
-function groupByProperty(
-    array: Hyprland.Workspace[],
-): Hyprland.Workspace[][] {
+function groupByProperty(array: Hyprland.Workspace[],): Hyprland.Workspace[][] {
     const map = new Map<Hyprland.Monitor, Hyprland.Workspace[]>();
 
     array.forEach((item) => {
@@ -23,16 +21,14 @@ function groupByProperty(
     });
 }
 
-export function Workspaces({vertical}: { vertical: boolean }) {
+export function Workspaces() {
     const hypr = Hyprland.get_default()
 
-    return <box
-        vertical={vertical}>
+    return <box>
         {bind(hypr, "workspaces").as((workspaces) => {
             const groupedWorkspaces = groupByProperty(workspaces)
             return groupedWorkspaces.map((workspaceGroup, index) => {
-                return <box
-                    vertical={vertical}>
+                return <box>
                     {index > 0 && index < groupedWorkspaces.length && <Divider/>}
                     {workspaceGroup.sort((a, b) => {
                         return a.id - b.id
