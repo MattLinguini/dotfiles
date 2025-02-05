@@ -1,4 +1,4 @@
-import Brightness from "../brightness"
+import Brightness from "../backlight"
 
 /**
  * Gets the current backlight level then assigns the proper icon

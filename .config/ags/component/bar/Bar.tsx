@@ -1,4 +1,4 @@
-import {App, Astal, Gtk, Gdk} from "astal/gtk3"
+import { Astal, Gtk }  from "astal/gtk3"
 import { Workspaces, FocusedClient } from "./widget/Workspaces"
 import { Clock } from "./widget/Clock"
 import { BatteryLevel } from "./widget/Battery"
