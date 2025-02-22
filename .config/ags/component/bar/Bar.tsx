@@ -1,4 +1,4 @@
-import { Astal, Gtk }  from "astal/gtk3"
+import { Astal, Gtk, Gdk }  from "astal/gtk3"
 import { Workspaces, FocusedClient } from "./widget/Workspaces"
 import { Clock } from "./widget/Clock"
 import { BatteryLevel } from "./widget/Battery"
@@ -10,7 +10,8 @@ export function Bar () {
     return <window
         className="Bar"
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
-        anchor={TOP | LEFT | RIGHT}>
+        anchor={TOP | LEFT | RIGHT}
+        monitor={0}>
         <centerbox>
             <box hexpand halign={Gtk.Align.START}>
                 <Workspaces />
