@@ -1,6 +1,6 @@
 /* Credit to https://github.com/JohnOberhauser for most of this */
 
-import {App, Astal, Gtk} from "astal/gtk3"
+import {App, Astal, Gtk} from "astal/gtk4";
 import {Binding, GLib} from "astal"
 
 /**
@@ -35,7 +35,7 @@ export function IconAlertWindow(
         anchor={Astal.WindowAnchor.BOTTOM}
         exclusivity={Astal.Exclusivity.NORMAL}
         layer={Astal.Layer.OVERLAY}
-        className="window"
+        cssClasses={["window"]}
         margin_bottom={100}
         visible={false}
         setup={(self) => {
@@ -60,7 +60,7 @@ export function IconAlertWindow(
         }}>
         <box
             halign={Gtk.Align.CENTER}
-            className={"alertContainer"}>
+            cssClasses={["alertContainer"]}
             <label
                 css={"margin-right: 20px; min-width: 60px"} // Center icon and ensure box is the same width.
                 className={"alertIcon"}

@@ -1,6 +1,6 @@
 /* Credit to https://github.com/JohnOberhauser for most of this */
 
-import {App, Astal, Gtk} from "astal/gtk3"
+import {App, Astal, Gtk} from "astal/gtk4";
 import {Binding, GLib} from "astal"
 
 /**
@@ -38,7 +38,7 @@ export function SliderAlertWindow(
         anchor={Astal.WindowAnchor.BOTTOM}
         exclusivity={Astal.Exclusivity.NORMAL}
         layer={Astal.Layer.OVERLAY}
-        className="window"
+        cssClasses={["window"]}
         margin_bottom={100}
         visible={false}
         setup={(self) => {
@@ -63,8 +63,9 @@ export function SliderAlertWindow(
         }}>
         <box
             halign={Gtk.Align.CENTER}
-            className={"alertContainer"}>
+            cssClasses={["alertContainer"]}>
             <label
+                marginEnd={15}
                 css={"margin-right: 15px;"}
                 className={"alertIcon"}
                 label={iconLabel}/>
