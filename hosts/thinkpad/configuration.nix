@@ -1,6 +1,7 @@
 { lib, config, pkgs, inputs, ... }:
-
-{
+let
+  inherit (lib.matt) enabled;
+in {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -82,6 +83,7 @@
       alias = "mattbennett";
       email = "matt.bennett715@gmail.com";
       shell.package = pkgs.zsh;
+      home-manager.enable = true;
     };
   };
 

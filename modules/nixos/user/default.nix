@@ -2,13 +2,12 @@
 let
   inherit (lib) mkEnableOption mkOption mkIf mkMerge types;
   inherit (lib.matt) mkOpt;
-
-in {
+in
+{
   options.mine.users = mkOption {
-    type = types.attrsOf (types.submodule ({ name, config, ... }: {
+    type = types.attrsOf (types.submodule ({ name, ... }: {
       options = {
         enable = mkEnableOption "Enable user ${name}";
-        name = mkOpt types.str name "User account name";
         alias = mkOpt types.str name "Full alias";
         email = mkOpt types.str "" "User email";
         homeDir = mkOpt types.str "/home/${name}" "Home directory path";
@@ -19,7 +18,7 @@ in {
           description = "Shell config for user";
           type = types.submodule {
             options = {
-              package = mkOpt types.package pkgs.fish "User shell";
+              package = mkOpt types.package pkgs.fish "Shell package";
             };
           };
         };
@@ -34,20 +33,32 @@ in {
       mkIf user.enable {
         mine.system.shell.zsh.enable = mkIf (user.shell.package == pkgs.zsh) true;
 
-        nix.settings.trusted-users = [ user.name ];
+        nix.settings.trusted-users = [ name ];
 
         environment.variables = {
           EDITOR = "nvim";
           VISUAL = "nvim";
         };
 
-        users.groups.${user.name} = { };
-        users.users.${user.name} = {
+        users.groups.${name} = { };
+        users.users.${name} = {
           isNormalUser = true;
           createHome = true;
-          group = user.name;
+          group = name;
           extraGroups = [ "wheel" ];
           shell = user.shell.package;
+        };
+
+        home-manager.users.${name} = mkIf user.home-manager.enable {
+          home.username = name;
+          home.homeDirectory = user.homeDir;
+          programs.fish.enable = user.shell.package == pkgs.fish;
+          programs.zsh.enable = user.shell.package == pkgs.zsh;
+          home.stateVersion = "24.11";
+          home.sessionVariables = {
+            EDITOR = "nvim";
+            VISUAL = "nvim";
+          };
         };
       }
     ) config.mine.users)
