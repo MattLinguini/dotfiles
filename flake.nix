@@ -42,7 +42,7 @@
     homeConfigurations = {
       matt = home-manager.lib.homeManagerConfiguration {
         inherit pkgs; 
-        modules = [ ./home.nix ];
+        modules = [ ./modules/nixos/user/home-manager/home.nix ];
       }; 
     };
   };
