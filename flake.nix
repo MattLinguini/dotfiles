@@ -15,7 +15,14 @@
 
   outputs = {self, nixpkgs, home-manager, lanzaboote, ...} @ inputs:
   let
-    lib = nixpkgs.lib;
+    lib = nixpkgs.lib.extend (
+      self: super: {
+        matt = import ./lib {
+          inherit inputs;
+          lib = self;
+        };
+      }
+    );
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
   in {

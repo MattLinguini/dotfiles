@@ -1,9 +1,10 @@
-{ config, pkgs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../../modules/nixos/import.nix
     ];
 
   boot.loader.systemd-boot.enable = true;
@@ -75,10 +76,13 @@
     pulse.enable = true;
   };
 
-  users.users.matt = {
-    isNormalUser = true;
-    description = "Matt Bennett";
-    extraGroups = [ "networkmanager" "wheel" ];
+  mine.users = {
+    matt = {
+      enable = true;
+      alias = "mattbennett";
+      email = "matt.bennett715@gmail.com";
+      shell.package = pkgs.zsh;
+    };
   };
 
   programs.firefox.enable = true;
