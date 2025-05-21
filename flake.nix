@@ -28,7 +28,10 @@
   in {
     nixosConfigurations = {
       "thinkpad" = lib.nixosSystem {
-        inherit system;
+        specialArgs = {
+          inherit system;
+          inherit lib;
+        };
         modules = [ 
           ./hosts/thinkpad/configuration.nix
 

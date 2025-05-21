@@ -1,16 +1,20 @@
-{ lib, config, pkgs, inputs, ... }:
+{ config, pkgs, lib, ... }:
 let
+
   inherit (lib.matt) enabled;
+  inherit (config.mine) user;
+
 in {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../modules/nixos/import.nix
     ];
+    
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  networking.hostName = "linguini"; # Define your hostname.
+  networking.hostName = "thinkpad"; # Define your hostname.
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -77,14 +81,9 @@ in {
     pulse.enable = true;
   };
 
-  mine.users = {
-    matt = {
-      enable = true;
-      alias = "mattbennett";
-      email = "matt.bennett715@gmail.com";
-      shell.package = pkgs.zsh;
-      home-manager.enable = true;
-    };
+  mine.user = {
+    enable = true;
+    home-manager = enabled;
   };
 
   programs.firefox.enable = true;
