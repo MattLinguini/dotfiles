@@ -6,10 +6,8 @@ import "../../config"
 PanelWindow {
     id: root
     
-    // Simple wallpaper configuration
-    property string wallpaperPath: Config.wallpaperPath
-    
-    // Layer properties
+    readonly property string wallpaperPath: Config.wallpaperPath
+
     screen: root.screen || Quickshell.primaryScreen
     exclusionMode: ExclusionMode.Ignore
     WlrLayershell.layer: WlrLayer.Bottom
@@ -24,7 +22,6 @@ PanelWindow {
     
     color: "transparent"
     
-    // Simple wallpaper image
     Image {
         id: wallpaper
         anchors.fill: parent
@@ -32,19 +29,14 @@ PanelWindow {
         fillMode: Image.PreserveAspectCrop
         smooth: true
         cache: true
+
+        // Decode at window size (clamped) to avoid oversized textures and 0x0 thrash on startup
+        sourceSize.width: Math.max(1, parent.width)
+        sourceSize.height: Math.max(1, parent.height)
+
         asynchronous: true
         
-        // Debug information
-        onStatusChanged: {
-            console.log("Wallpaper status:", status)
-            if (status === Image.Error) {
-                console.log("Wallpaper failed to load:", source)
-            } else if (status === Image.Ready) {
-                console.log("Wallpaper loaded successfully:", source)
-            }
-        }
-        
-        // Fallback background color if image fails to load
+        // If image fails to load, fallback to solid color
         Rectangle {
             anchors.fill: parent
             color: "#1a1a1a"
