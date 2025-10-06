@@ -6,6 +6,7 @@ import Quickshell
 import Quickshell.Hyprland
 import "../../services"
 import "../../config"
+import "../common"
 import "VolumeIndicator"
 import "BrightnessIndicator"
 import "TimeDisplay"
@@ -18,22 +19,14 @@ PanelWindow {
   // Properties
   property color mColor: Colors.surface
   property int barHeight: 52
-  property int indicatorSize: 64
-  property int indicatorHeight: 24
-  property int workspaceButtonSize: 32
-  property int workspaceButtonHeight: 24
   property int cornerRadius: 30
-  property int smallRadius: 6
   property int margin: 12
-  property int smallMargin: 2
   property int spacing: 12
-  property int smallSpacing: 6
 
   // Window configuration
   color: "transparent"
   exclusionMode: ExclusionMode.Normal
   mask: Region {}
-  screen: root.screen
   exclusiveZone: root.barHeight
 
   anchors {
@@ -45,8 +38,8 @@ PanelWindow {
   // Main bar container
   Rectangle {
     id: top
-    implicitWidth: QsWindow.window.width
-    implicitHeight: root.barHeight
+    width: parent.width
+    height: root.barHeight
     color: root.mColor
 
     // Center - Workspace Switcher
@@ -94,49 +87,20 @@ PanelWindow {
 
   // Left rounded corner for top border
   Corner {
-    x: 0
-    y: top.implicitHeight
+    anchors.left: parent.left
+    anchors.top: top.bottom
     rotation: 0
+    radius: root.cornerRadius
+    fillColor: root.mColor
   }
 
   // Right rounded corner for top border
   Corner {
-    x: QsWindow.window.width - radius
-    y: top.implicitHeight
+    anchors.right: parent.right
+    anchors.top: top.bottom
     rotation: 90
-  }
-
-  // Reusable corner component
-  component Corner: Shape {
-    id: corner
-    preferredRendererType: Shape.CurveRenderer
-
-    property real radius: root.cornerRadius
-
-    ShapePath {
-      strokeWidth: 0
-      fillColor: root.mColor
-
-      startX: corner.radius
-
-      PathArc {
-        relativeX: -corner.radius
-        relativeY: corner.radius
-        radiusX: corner.radius
-        radiusY: corner.radius
-        direction: PathArc.Counterclockwise
-      }
-
-      PathLine {
-        relativeX: 0
-        relativeY: -corner.radius
-      }
-
-      PathLine {
-        relativeX: corner.radius
-        relativeY: 0
-      }
-    }
+    radius: root.cornerRadius
+    fillColor: root.mColor
   }
 
 }
