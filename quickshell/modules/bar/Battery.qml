@@ -77,7 +77,6 @@ Item {
                 Text {
                     text: BatteryService.batteryLevel * 100 + "%"
                     font.pixelSize: 12
-                    
                     color: Colors.surface
                 }
             }

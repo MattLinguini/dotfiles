@@ -1,66 +1,77 @@
 import QtQuick
 import Quickshell.Io
+import QtQuick.Layouts
+import Quickshell.Widgets
+import "../common"
 import "../../config"
 
-Rectangle {
+Item {
     id: root
+    width: 65
+    height: 25
     
-    // Properties
-    property int indicatorSize: 64
-    property int indicatorHeight: 24
-    property int smallRadius: 6
-    property int smallMargin: 2
     property int volumeLevel: 100
-    
-    // Visual properties
-    width: indicatorSize
-    height: indicatorHeight
-    radius: smallRadius
-    color: Colors.surfaceContainerHigh
-    border.color: Colors.outlineVariant
-    border.width: 1
+    readonly property color levelColor: Colors.surfaceTextColor
 
-    // Volume level bar
-    Rectangle {
-        id: volumeLevelBar
-        anchors {
-            left: parent.left
-            top: parent.top
-            bottom: parent.bottom
-            margins: root.smallMargin
-        }
-        width: (root.volumeLevel / 100) * (root.width - 4)
-        radius: 2
-        color: Colors.primary
-    }
-
-    // Volume percentage text
-    Text {
-        anchors.centerIn: parent
-        text: root.volumeLevel + "%"
-        color: Colors.backgroundTextColor
-        font.pixelSize: 10
-        font.family: "Inter, sans-serif"
-        font.bold: true
-    }
-
-    // Volume icon
-    Text {
-        anchors {
-            right: parent.right
-            top: parent.top
-            margins: root.smallMargin
-        }
-        text: "🔊"
-        color: Colors.primary
-        font.pixelSize: 8
-    }
-
-    // Click to cycle volume levels
-    MouseArea {
+    ClippingRectangle {
+        id: background
         anchors.fill: parent
-        onClicked: cycleVolume()
+        radius: 100
+        color: Colors.surfaceContainerHigh
+
+        RowLayout {
+            id: textLayer
+            anchors.centerIn: parent
+            anchors.verticalCenterOffset: -1
+            spacing: 0
+
+            MaterialIcon {
+                icon: "volume_up"
+                font.pixelSize: 16
+                color: Colors.surfaceTextColor
+            }
+
+            Text {
+                text: root.volumeLevel + "%"
+                font.pixelSize: 12
+                color: Colors.surfaceTextColor
+            }
+        }
+
+        Rectangle {
+            id: bar
+            clip: true
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            width: root.width * Math.min(Math.max(root.volumeLevel / 100, 0), 1)
+            height: root.height
+            color: levelColor
+
+            Behavior on width { NumberAnimation { duration: 300; easing.type: Easing.OutExpo } }
+
+            RowLayout {
+                id: textLayer2
+                x: (root.width - width) / 2
+                y: (root.height - height) / 2 - 1
+                spacing: 0
+
+                MaterialIcon {
+                    icon: "volume_up"
+                    font.pixelSize: 16
+                    color: Colors.surface
+                }
+
+                Text {
+                    text: root.volumeLevel + "%"
+                    font.pixelSize: 12
+                    color: Colors.surface
+                }
+            }
+        }
     }
+
+    MouseArea { anchors.fill: parent; onClicked: cycleVolume() }
 
     // Volume level cycling logic
     function cycleVolume() {
