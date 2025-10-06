@@ -1,9 +1,6 @@
-import Quickshell
-import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
-import Quickshell.Io
-import Quickshell.Services.UPower
+import Quickshell.Widgets
 import "../common"
 import "../../services"
 import "../../config"
@@ -14,54 +11,39 @@ Item {
     height: 25
     visible: BatteryService.hasBattery
 
-    property var low_battery_level: 15
-    property string battery: visible ? (BatteryService.batteryLevel * 100) + "%" : "0%"
-
-    property color batteryColor: {
-        if (!BatteryService.isPluggedIn) {
-            return Colors.success;
-        }
-        if (BatteryService.batteryLevel < 0.2) {
+    readonly property color batteryColor: {
+        if (BatteryService.batteryLevel < BatteryService.lowLevel) {
             return Colors.error;
         }
-        if (BatteryService.batteryLevel < 0.5) {
-            return Colors.secondary;
-        }
-        return Colors.success;
-    }
-
-    function isLowBattery() {
-        return parseFloat(root.battery) < root.low_battery_level;
-    }
-
-    property string icon: {
-        if (!BatteryService.isPluggedIn) return "bolt";
-        return "";
+    
+        return Colors.surfaceTextColor;
     }
 
     ClippingRectangle {
         id: background
         anchors.fill: parent
         radius: 100
-        color: Colors.opacify(batteryColor, 0.2)
+        color: Colors.surfaceContainerHigh
 
         RowLayout {
             id: textLayer
             anchors.centerIn: parent
+            anchors.verticalCenterOffset: -1
             spacing: 0
 
             MaterialIcon {
-                icon: root.icon
+                icon: BatteryService.isPluggedIn ? "bolt" : "bolt"
+                fill: BatteryService.isPluggedIn ? 1 : 0
                 font.pixelSize: 16
-                color: batteryColor
+                color: surfaceTextColor
             }
 
             Text {
                 id: batteryText
-                text: root.battery
+                text: BatteryService.batteryLevel * 100 + "%"
                 font.pixelSize: 12
-                color: batteryColor
-                font.bold: root.isLowBattery()
+                color: surfaceTextColor
+                font.bold: BatteryService.isBatteryLow
             }
         }
 
@@ -71,9 +53,8 @@ Item {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.left: parent.left
-            anchors.right: parent.right
-            width: root.width * Math.min(Math.max(parseFloat(battery), 0), 100) / 100
-            height: root.height * Math.min(Math.max(parseFloat(battery), 0), 100) / 100
+            width: root.width * Math.min(Math.max(BatteryService.batteryLevel, 0), 1)
+            height: root.height
             color: batteryColor
 
             Behavior on width {
@@ -83,18 +64,20 @@ Item {
             RowLayout {
                 id: textLayer2
                 x: (root.width - width) / 2
-                y: (root.height - height) / 2
+                y: (root.height - height) / 2 - 1
                 spacing: 0
 
                 MaterialIcon {
-                    icon: root.icon
+                    icon: BatteryService.isPluggedIn ? "bolt" : "bolt"
+                    fill: BatteryService.isPluggedIn ? 1 : 0
                     font.pixelSize: 16
                     color: Colors.surface
                 }
 
                 Text {
-                    text: root.battery
+                    text: BatteryService.batteryLevel * 100 + "%"
                     font.pixelSize: 12
+                    
                     color: Colors.surface
                 }
             }

@@ -61,6 +61,10 @@ Row {
                 : (hovered
                     ? Colors.surfaceContainerHighest
                     : (isOccupied ? Colors.primary : Colors.surfaceContainerHigh))
+
+            // Smooth transitions
+            Behavior on color { ColorAnimation { duration: 150 } }
+            Behavior on width { NumberAnimation { duration: 120; easing.type: Easing.OutCubic } }
         }
     }
 }
