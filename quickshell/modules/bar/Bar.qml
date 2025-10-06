@@ -10,8 +10,9 @@ import "../common"
 import "VolumeIndicator"
 import "BrightnessIndicator"
 import "TimeDisplay"
-import "WorkspaceSwitcher"
+import "Workspaces"
 import "WindowInfo"
+import "Battery"
 
 PanelWindow {
   id: root
@@ -42,8 +43,8 @@ PanelWindow {
     height: root.barHeight
     color: root.mColor
 
-    // Center - Workspace Switcher
-    WorkspaceSwitcher {
+    // Center - Workspaces
+    Workspaces {
       id: workspacesRow
       anchors {
         horizontalCenter: parent.horizontalCenter
@@ -78,7 +79,7 @@ PanelWindow {
       BrightnessIndicator {}
 
       // Battery Indicator
-      BatteryIndicator {}
+      Battery {}
 
       // Time Display
       TimeDisplay {}
