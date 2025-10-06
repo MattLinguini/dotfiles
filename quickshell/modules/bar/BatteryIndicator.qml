@@ -10,7 +10,7 @@ Rectangle {
     color: Colors.surfaceContainerHigh
     border.color: Colors.outlineVariant
     border.width: 1
-    visible: BatteryService.available
+    visible: BatteryService.hasBattery
 
     // Battery level bar
     Rectangle {
@@ -21,11 +21,11 @@ Rectangle {
             bottom: parent.bottom
             margins: 2
         }
-                    width: (BatteryService.percentage * 100 / 100) * (batteryContainer.width - 4)
+                    width: (BatteryService.batteryLevel * 100 / 100) * (batteryContainer.width - 4)
                     radius: 2
                     color: {
-                        if (BatteryService.percentage > 0.5) return Colors.success
-                        if (BatteryService.percentage > 0.2) return Colors.warning
+                        if (BatteryService.batteryLevel > 0.5) return Colors.success
+                        if (BatteryService.batteryLevel > 0.2) return Colors.warning
                         return Colors.error
                     }
     }
@@ -33,7 +33,7 @@ Rectangle {
     // Battery percentage text
     Text {
         anchors.centerIn: parent
-        text: Math.round(BatteryService.percentage * 100) + "%"
+        text: Math.round(BatteryService.batteryLevel * 100) + "%"
         color: Colors.backgroundTextColor
         font.pixelSize: 10
         font.family: "Inter, sans-serif"
@@ -50,7 +50,7 @@ Rectangle {
         text: "⚡"
         color: Colors.warning
         font.pixelSize: 8
-        visible: BatteryService.isCharging
+        visible: BatteryService.isChargingOrFull
     }
 
     // Battery icon
@@ -62,8 +62,8 @@ Rectangle {
         }
         text: "🔋"
         color: {
-            if (BatteryService.percentage > 0.5) return Colors.success
-            if (BatteryService.percentage > 0.2) return Colors.warning
+            if (BatteryService.batteryLevel > 0.5) return Colors.success
+            if (BatteryService.batteryLevel > 0.2) return Colors.warning
             return Colors.error
         }
         font.pixelSize: 8
