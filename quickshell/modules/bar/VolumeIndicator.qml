@@ -4,14 +4,23 @@ import QtQuick.Layouts
 import Quickshell.Widgets
 import "../common"
 import "../../config"
+import "../../services"
 
 Item {
     id: root
     width: 65
     height: 25
     
-    property int volumeLevel: 100
+    property int volumeLevel: Math.round(AudioService.volumeLevel * 100)
     readonly property color levelColor: Colors.surfaceTextColor
+    
+    // Bind to AudioService volume changes
+    Connections {
+        target: AudioService
+        function onVolumeLevelChanged() {
+            root.volumeLevel = Math.round(AudioService.volumeLevel * 100)
+        }
+    }
 
     ClippingRectangle {
         id: background
@@ -81,47 +90,9 @@ Item {
         setVolume(levels[nextIndex])
     }
 
-    // Process for getting current volume
-    Process {
-        id: volumeProcess
-        command: ["pactl", "get-sink-volume", "@DEFAULT_SINK@"]
-        running: false
-        stdout: StdioCollector {
-            onStreamFinished: {
-                const output = text.trim()
-                const matches = output.match(/(\d+)%/)
-                if (matches && matches.length > 1) {
-                    const level = parseInt(matches[1])
-                    if (!isNaN(level)) {
-                        root.volumeLevel = level
-                    }
-                }
-            }
-        }
-    }
-
-    // Process for setting volume
-    Process {
-        id: setVolumeProcess
-        command: ["pactl", "set-sink-volume", "@DEFAULT_SINK@", "0%"]
-        running: false
-    }
-
-    // Timer to periodically update volume
-    Timer {
-        interval: 2000
-        running: true
-        repeat: true
-        onTriggered: volumeProcess.running = true
-    }
 
     // Function to set volume
     function setVolume(level) {
-        setVolumeProcess.command = ["pactl", "set-sink-volume", "@DEFAULT_SINK@", level + "%"]
-        setVolumeProcess.running = true
-        volumeLevel = level
-        volumeProcess.running = true
+        AudioService.setVolume(level / 100.0)
     }
-
-    Component.onCompleted: volumeProcess.running = true
 }

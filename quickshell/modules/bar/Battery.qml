@@ -35,14 +35,14 @@ Item {
                 icon: BatteryService.isPluggedIn ? "bolt" : "bolt"
                 fill: BatteryService.isPluggedIn ? 1 : 0
                 font.pixelSize: 16
-                color: surfaceTextColor
+                color: Colors.surfaceTextColor
             }
 
             Text {
                 id: batteryText
                 text: BatteryService.batteryLevel * 100 + "%"
                 font.pixelSize: 12
-                color: surfaceTextColor
+                color: Colors.surfaceTextColor
                 font.bold: BatteryService.isBatteryLow
             }
         }

@@ -1,0 +1,27 @@
+# ignore everything at repo root
+/*
+
+# keep the rules file itself
+!.gitignore
+
+# keep these dirs (and everything inside)
+!/quickshell/
+!/quickshell/**
+
+!/hypr/
+!/hypr/**
+
+!/kitty/
+!/kitty/**
+
+!/pipewire/
+!/pipewire/**
+
+!/macchina/
+!/macchina/**
+
+!/fish/
+!/fish/**
+
+# keep single files at root
+!/starship.toml
