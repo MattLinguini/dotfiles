@@ -23,5 +23,11 @@
 !/fish/
 !/fish/**
 
+!/lazygit/
+!/lazygit/**
+
+!/nvim/
+!/nvim/**
+
 # keep single files at root
 !/starship.toml
