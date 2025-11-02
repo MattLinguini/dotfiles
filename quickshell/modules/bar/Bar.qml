@@ -20,7 +20,7 @@ PanelWindow {
   // Properties
   property color mColor: Colors.surface
   property int barHeight: 52
-  property int cornerRadius: 30
+  property int cornerRadius: 20
   property int margin: 12
   property int spacing: 12
 

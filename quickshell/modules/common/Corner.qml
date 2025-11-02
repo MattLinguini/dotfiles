@@ -6,8 +6,7 @@ Shape {
   id: corner
   preferredRendererType: Shape.CurveRenderer
 
-  // Public API
-  property real radius: 30
+  property real radius: 20
   property color fillColor: "transparent"
 
   ShapePath {
