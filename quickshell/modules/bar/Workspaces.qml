@@ -1,4 +1,6 @@
 import QtQuick
+import Quickshell
+import Quickshell.Wayland
 import Quickshell.Hyprland
 import "../../config"
 
@@ -13,8 +15,31 @@ Item {
     readonly property int workspaceButtonHeight: 12
     readonly property int smallRadius: 10
     
-    // Calcuates the active workspace id from Hyprland.
+    // Get the monitor that this bar is displayed on
+    // Try direct access first, then traverse parent chain if needed
+    readonly property HyprlandMonitor monitor: {
+        // First try direct QsWindow access (works with ComponentBehavior: Bound)
+        if (root.QsWindow && root.QsWindow.window && root.QsWindow.window.screen) {
+            return Hyprland.monitorFor(root.QsWindow.window.screen)
+        }
+        // Fallback: traverse up to find PanelWindow with QsWindow
+        var parentItem = root.parent
+        while (parentItem) {
+            if (parentItem.QsWindow && parentItem.QsWindow.window && parentItem.QsWindow.window.screen) {
+                return Hyprland.monitorFor(parentItem.QsWindow.window.screen)
+            }
+            parentItem = parentItem.parent
+        }
+        return null
+    }
+    
+    // Gets the active workspace id for the monitor this bar is displayed on
     readonly property int activeWorkspaceId: {
+        if (monitor && monitor.activeWorkspace) {
+            var v = parseInt(monitor.activeWorkspace.id, 10)
+            return isNaN(v) ? -1 : v
+        }
+        // Fallback to old behavior if monitor is not available
         if (!(Hyprland.workspaces && Hyprland.workspaces.values)) return -1
         for (var i = 0; i < Hyprland.workspaces.values.length; i++) {
             var ws = Hyprland.workspaces.values[i]
@@ -65,7 +90,7 @@ Item {
         anchors.margins: backgroundPadding
 
         Repeater {
-            model: 10 // Hyprland has 10 workspaces.
+            model: 10
 
             Rectangle {
                 property int wsId: index + 1
